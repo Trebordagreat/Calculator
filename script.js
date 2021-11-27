@@ -13,6 +13,21 @@ buttons.forEach(button => {
 const equals = document.querySelector("#equals");
 equals.addEventListener('click', equate);
 
+const cleared = document.querySelector("#clear");
+cleared.addEventListener('click', () => {
+    display.textContent = "";
+});
+
+const decimal = document.querySelector("#decimal");
+decimal.addEventListener('click', () => {
+    display.textContent += ".";
+}
+)
+
+function clearDisplay() {
+    display.textContent = "";
+}
+
 function equate () {
     equation = display.textContent;
     equationArray = equation.split("");
@@ -40,15 +55,33 @@ function equate () {
             }
         }
     }
-    console.log(equationArray);
-    console.log(fullNumber);
-    console.log(`${ cleanEquation }`);
+    if (checkDecimals(cleanEquation) === true) {
+        display.textContent = "ERROR";
+        return;
+    }
     solveOut(cleanEquation);
 };
 
+function checkDecimals(eqArray) {
+    for (let i = 0; i < eqArray.length; i++) {
+        let numberSplit = eqArray[i].split("");
+        let totalDecimals = 0;
+        for (let j = 0; j < numberSplit.length; j++) {
+            if (numberSplit[j] === ".") {
+                totalDecimals++;
+            }
+        }
+        if (totalDecimals > 1) {
+            return true;
+        }
+        totalDecimals = 0;
+    }
+    return false;
+}
+
 function solveOut (eqArray) {
     if (eqArray.length === 1) {
-        display.textContent = `${ eqArray[0]}`;
+        display.textContent = `${ Number(eqArray[0]).toFixed(2) }`;
     }
     else if (eqArray.includes("/")) {
         solveOut(partialSolve("/", eqArray));
@@ -76,7 +109,6 @@ function partialSolve(operator, eqArray) {
             for (let j = i + 2; j < eqArray.length; j++) {
                 partiallySolved.push(eqArray[j]);
             }
-            console.log(partiallySolved);
             return partiallySolved;
         }
     }
@@ -128,7 +160,7 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
-    if(b === 0) {
+    if(b == 0) {
         return "ERROR";
     }
     return a / b;
