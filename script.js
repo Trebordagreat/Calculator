@@ -81,7 +81,10 @@ function checkDecimals(eqArray) {
 
 function solveOut (eqArray) {
     if (eqArray.length === 1) {
-        display.textContent = `${ Number(eqArray[0]).toFixed(2) }`;
+        if (Number(eqArray[0]) % 0.01 !== 0) {
+            eqArray[0] = Number(eqArray[0]).toFixed(2);
+        }
+        display.textContent = `${ Number(eqArray[0]) }`;
     }
     else if (eqArray.includes("/")) {
         solveOut(partialSolve("/", eqArray));

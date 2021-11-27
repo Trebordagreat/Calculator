@@ -9,11 +9,13 @@
 .calculator {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 400px;
-    padding: 30px;
+    width: 600px;
+    height: 800px;
+    padding: 50px;
     background-color: grey;
     gap: 5%;
+    border-radius: 8%;
+    justify-content: center;
 }
 
 .display {
@@ -23,6 +25,11 @@
     height: 15%;
     align-items: center;
     justify-content: center;
+    border-radius: 7%;
+    background-color: rgb(76, 160, 76);
+    font-size: 70px;
+    color: black;
+    font-family: monospace;
 }
 
 .row {
@@ -31,20 +38,23 @@
     gap: 5%
 }
 
-.number {
-    display: flex;
-    flex: auto;
-    background-color: white;
-    width: 15%;
-    align-items: center;
-    justify-content: center;
-}
-
+.number,
 .operator {
     display: flex;
     flex: auto;
-    background-color: yellow;
-    width: 15%;
     align-items: center;
     justify-content: center;
+    border-radius: 20%;
+    font-size: 40px;
+}
+.number {
+    background-color: white;
+}
+
+.operator {
+    background-color: yellow;
+}
+
+#backspace {
+    width: 5%
 }
