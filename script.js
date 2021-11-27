@@ -1,3 +1,13 @@
+const display = document.querySelector(".display");
+
+const buttons = document.querySelectorAll(".btn");
+buttons.forEach(button => {
+    button.addEventListener('click', addToDisplay)
+});
+
+function addToDisplay(symbol) {
+    display.textContent = `${ symbol.target.id }`;
+}
 
 function operate (operator, a, b) {
     if(operator === "+") {
@@ -27,5 +37,8 @@ function multiply(a, b) {
 };
 
 function divide(a, b) {
+    if(b === 0) {
+        return "ERROR";
+    }
     return a / b;
 };
