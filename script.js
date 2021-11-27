@@ -19,7 +19,27 @@ function equate () {
     if (errorCheck(equationArray) === true) {
         display.textContent = "ERROR";
     }
-    console.log(`${ equationArray }`);
+    cleanEquation = [];
+    fullNumber = 0;
+    for (i = 0; i < equationArray.length; i++) {
+        if (operatorsList.includes(equationArray[i]) === true) {
+            cleanEquation.push(fullNumber);
+            fullNumber = 0;
+            cleanEquation.push(equationArray[i]);
+        }
+        else if (fullNumber === 0) {
+            fullNumber = equationArray[i];
+        }
+        else {
+            fullNumber += equationArray[i];
+            if (i === equationArray.length - 1) {
+                cleanEquation.push(fullNumber);
+                console.log("test");
+            }
+        }
+    }
+    console.log(` ${ fullNumber }`)
+    console.log(`${ cleanEquation }`);
 };
 
 function errorCheck (eq) {   
