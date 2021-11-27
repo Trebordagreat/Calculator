@@ -30,6 +30,7 @@
     font-size: 70px;
     color: black;
     font-family: monospace;
+    overflow: hidden;
 }
 
 .row {
