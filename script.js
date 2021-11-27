@@ -29,18 +29,59 @@ function equate () {
         }
         else if (fullNumber === 0) {
             fullNumber = equationArray[i];
+            if (i === equationArray.length -1) {
+                cleanEquation.push(fullNumber);
+            }
         }
         else {
             fullNumber += equationArray[i];
-            if (i === equationArray.length - 1) {
+            if (i === equationArray.length -1) {
                 cleanEquation.push(fullNumber);
-                console.log("test");
             }
         }
     }
-    console.log(` ${ fullNumber }`)
+    console.log(equationArray);
+    console.log(fullNumber);
     console.log(`${ cleanEquation }`);
+    solveOut(cleanEquation);
 };
+
+function solveOut (eqArray) {
+    if (eqArray.length === 1) {
+        display.textContent = `${ eqArray[0]}`;
+    }
+    else if (eqArray.includes("/")) {
+        solveOut(partialSolve("/", eqArray));
+    }
+    else if (eqArray.includes("x")) {
+        solveOut(partialSolve("x", eqArray));
+    }
+    else if (eqArray.includes("-")) {
+        solveOut(partialSolve("-", eqArray));
+    }
+    else if (eqArray.includes("+")) {
+        solveOut(partialSolve("+", eqArray));
+    }
+}
+
+function partialSolve(operator, eqArray) {
+    partiallySolved = [];
+    for (let i = 0; i < eqArray.length; i++) {
+        if (eqArray[i] === operator) {
+            for (let j = 0; j < i - 1; j++) {
+                partiallySolved.push(eqArray[j]);
+            }
+            let newNumber = operate(eqArray[i], eqArray[i - 1], eqArray[i + 1]);
+            partiallySolved.push(newNumber);
+            for (let j = i + 2; j < eqArray.length; j++) {
+                partiallySolved.push(eqArray[j]);
+            }
+            console.log(partiallySolved);
+            return partiallySolved;
+        }
+    }
+
+}
 
 function errorCheck (eq) {   
     if (operatorsList.includes(eq[0]) === true) {
@@ -61,16 +102,16 @@ function errorCheck (eq) {
 
 function operate (operator, a, b) {
     if(operator === "+") {
-        add(a, b);
+        return add(Number(a), Number(b));
     }
     else if (operator === "-") {
-        subtract(a, b);
+        return subtract(a, b);
     }
     else if (operator === "x") {
-        multiply(a, b);
+        return multiply(a, b);
     }
     else if (operator === "/") {
-        divide(a, b);
+        return divide(a, b);
     }
 }
 
