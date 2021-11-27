@@ -21,12 +21,14 @@ cleared.addEventListener('click', () => {
 const decimal = document.querySelector("#decimal");
 decimal.addEventListener('click', () => {
     display.textContent += ".";
-}
-)
+});
 
-function clearDisplay() {
-    display.textContent = "";
-}
+const backspace = document.querySelector("#backspace");
+backspace.addEventListener('click', () => {
+    let currentDisplay = display.textContent.split("");
+    currentDisplay.pop();
+    display.textContent = currentDisplay.join("");
+})
 
 function equate () {
     equation = display.textContent;
